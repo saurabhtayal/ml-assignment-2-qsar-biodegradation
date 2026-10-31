@@ -112,7 +112,54 @@
   </header>
 
   <section>
-    <h2>1. Problem statement</h2>
+    <h2>1. GitHub repository link</h2>
+    <div class="link-card">
+      <strong>Repository:</strong>
+      <a href="https://github.com/saurabhtayal/ml-assignment-2-qsar-biodegradation">
+        https://github.com/saurabhtayal/ml-assignment-2-qsar-biodegradation
+      </a>
+    </div>
+    <p>The repository contains all required submission materials:</p>
+    <ul>
+      <li>Complete source code, including <code>app.py</code> and training scripts.</li>
+      <li><code>requirements.txt</code> with the application dependencies.</li>
+      <li>A clear <code>README.md</code> describing the project and results.</li>
+      <li>Test data used in the experiments: <code>data/test_data.csv</code>.</li>
+      <li>Saved model artifacts in the <code>model/</code> directory.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>2. Live Streamlit app link</h2>
+    <div class="link-card">
+      <strong>Live application:</strong>
+      <a href="https://ml-assignment-2-qsar-biodegradation-onsuyyappeeggmgshgvpift.streamlit.app/">
+        https://ml-assignment-2-qsar-biodegradation-onsuyyappeeggmgshgvpift.streamlit.app/
+      </a>
+    </div>
+    <p>
+      The application is deployed using Streamlit Community Cloud and opens an
+      interactive frontend for uploading test data, selecting a model, and
+      viewing evaluation results.
+    </p>
+  </section>
+
+  <section class="page-break">
+    <h2>3. BITS Virtual Lab execution screenshot</h2>
+    <p>
+      The screenshot below shows the assignment execution on BITS Virtual Lab.
+    </p>
+    <img
+      alt="BITS Virtual Lab execution screenshot"
+      src="bits-virtual-lab-execution-screenshot.png"
+      style="display: block; margin: 12px auto; max-width: 100%;"
+    >
+  </section>
+
+  <section class="page-break">
+    <h2>4. GitHub README content</h2>
+
+    <h3>Problem statement</h3>
     <p>
       Given molecular descriptors for an organic compound, predict whether it
       is <strong>readily biodegradable (RB)</strong> or
@@ -120,10 +167,8 @@
       accepts a labelled CSV test set, loads one of the pre-trained models,
       and reports its performance without retraining on uploaded data.
     </p>
-  </section>
 
-  <section>
-    <h2>2. Dataset description</h2>
+    <h3>Dataset description</h3>
     <p>
       This project uses the
       <strong>QSAR biodegradation</strong> dataset from the
@@ -148,42 +193,24 @@
       The original source remains the authoritative definition of each
       descriptor.
     </p>
-  </section>
 
-  <section>
-    <h2>3. GitHub repository link</h2>
-    <div class="link-card">
+    <h3>GitHub repository link</h3>
+    <p>
       <strong>Repository:</strong>
       <a href="https://github.com/saurabhtayal/ml-assignment-2-qsar-biodegradation">
         https://github.com/saurabhtayal/ml-assignment-2-qsar-biodegradation
       </a>
-    </div>
-  </section>
+    </p>
 
-  <section>
-    <h2>4. Live Streamlit app link</h2>
-    <div class="link-card">
-      <strong>Live application:</strong>
+    <h3>Live Streamlit application</h3>
+    <p>
+      <strong>Application:</strong>
       <a href="https://ml-assignment-2-qsar-biodegradation-onsuyyappeeggmgshgvpift.streamlit.app/">
         https://ml-assignment-2-qsar-biodegradation-onsuyyappeeggmgshgvpift.streamlit.app/
       </a>
-    </div>
-  </section>
-
-  <section class="page-break">
-    <h2>5. BITS Virtual Lab execution screenshot</h2>
-    <p>
-      The screenshot below shows the assignment execution on BITS Virtual Lab.
     </p>
-    <img
-      alt="BITS Virtual Lab execution screenshot"
-      src="bits-virtual-lab-execution-screenshot.png"
-      style="display: block; margin: 12px auto; max-width: 100%;"
-    >
-  </section>
 
-  <section class="page-break">
-    <h2>6. Models used and evaluation</h2>
+    <h3>Models used and evaluation</h3>
     <p>
       All models were trained on the same training partition and evaluated on
       the same untouched 211-row test partition. Standard scaling is included
@@ -273,25 +300,6 @@
         </tr>
       </tbody>
     </table>
-  </section>
-
-  <section>
-    <h2>7. Streamlit application features</h2>
-    <ol>
-      <li>A CSV uploader for labelled test data.</li>
-      <li>A classifier dropdown for all five saved models.</li>
-      <li>A Run evaluation button that evaluates the uploaded file only after explicit submission.</li>
-      <li>Accuracy, AUC, precision, recall, F1, and MCC metric cards.</li>
-      <li>A confusion matrix and prediction-summary chart.</li>
-      <li>Validation for missing columns and unsupported target labels.</li>
-    </ol>
-    <p>
-      Uploaded data must contain all 41
-      <code>descriptor_01</code> ... <code>descriptor_41</code> columns and a
-      <code>target</code> column containing <code>NRB</code> or <code>RB</code>.
-      The application loads the saved model and evaluates the uploaded rows
-      without retraining.
-    </p>
   </section>
 </body>
 </html>

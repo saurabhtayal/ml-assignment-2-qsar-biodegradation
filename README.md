@@ -61,20 +61,3 @@ Naive Bayes models use the original numerical values.
 | Naive Bayes | Highest recall, so it identifies most RB compounds, but its low precision and accuracy indicate many false positives. The conditional-independence assumption is restrictive for molecular descriptors. |
 | Support Vector Machine | Very strong AUC and precision, close to Logistic Regression. Its slightly lower recall leads to a marginally lower F1 and accuracy on this split. |
 | **Overall winner** | **Logistic Regression**, because it leads on the principal aggregate measures while remaining interpretable and efficient. SVM is a close second. |
-
-## Streamlit application
-
-The app includes:
-
-1. A CSV uploader for labelled test data.
-2. A classifier dropdown for all five saved models.
-3. A **Run evaluation** button that evaluates the uploaded file only after
-   explicit submission.
-4. Accuracy, AUC, precision, recall, F1, and MCC metric cards.
-5. A confusion matrix and prediction-summary chart.
-6. Validation for missing columns and unsupported target labels.
-
-Uploaded data must contain all 41 `descriptor_01` ... `descriptor_41` columns
-and a `target` column containing `NRB` or `RB`. The application never calls
-`.fit()`; it only loads the committed `.joblib` artifacts and evaluates the
-uploaded rows.
