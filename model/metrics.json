@@ -1,0 +1,146 @@
+{
+  "Logistic Regression": {
+    "accuracy": 0.8672985781990521,
+    "auc": 0.8924547283702212,
+    "precision": 0.8307692307692308,
+    "recall": 0.7605633802816901,
+    "f1": 0.7941176470588235,
+    "mcc": 0.6979741451792164,
+    "confusion_matrix": [
+      [
+        129,
+        11
+      ],
+      [
+        17,
+        54
+      ]
+    ]
+  },
+  "Decision Tree": {
+    "accuracy": 0.7819905213270142,
+    "auc": 0.7501006036217304,
+    "precision": 0.6923076923076923,
+    "recall": 0.6338028169014085,
+    "f1": 0.6617647058823529,
+    "mcc": 0.5024507786509185,
+    "confusion_matrix": [
+      [
+        120,
+        20
+      ],
+      [
+        26,
+        45
+      ]
+    ]
+  },
+  "K-Nearest Neighbors": {
+    "accuracy": 0.8151658767772512,
+    "auc": 0.8569919517102615,
+    "precision": 0.7162162162162162,
+    "recall": 0.7464788732394366,
+    "f1": 0.7310344827586207,
+    "mcc": 0.5906253928248419,
+    "confusion_matrix": [
+      [
+        119,
+        21
+      ],
+      [
+        18,
+        53
+      ]
+    ]
+  },
+  "Naive Bayes": {
+    "accuracy": 0.6919431279620853,
+    "auc": 0.8335010060362172,
+    "precision": 0.5241935483870968,
+    "recall": 0.9154929577464789,
+    "f1": 0.6666666666666666,
+    "mcc": 0.4742488353625322,
+    "confusion_matrix": [
+      [
+        81,
+        59
+      ],
+      [
+        6,
+        65
+      ]
+    ]
+  },
+  "Support Vector Machine": {
+    "accuracy": 0.8578199052132701,
+    "auc": 0.8913480885311872,
+    "precision": 0.8360655737704918,
+    "recall": 0.7183098591549296,
+    "f1": 0.7727272727272727,
+    "mcc": 0.6742286975654609,
+    "confusion_matrix": [
+      [
+        130,
+        10
+      ],
+      [
+        20,
+        51
+      ]
+    ]
+  },
+  "_metadata": {
+    "feature_names": [
+      "descriptor_01",
+      "descriptor_02",
+      "descriptor_03",
+      "descriptor_04",
+      "descriptor_05",
+      "descriptor_06",
+      "descriptor_07",
+      "descriptor_08",
+      "descriptor_09",
+      "descriptor_10",
+      "descriptor_11",
+      "descriptor_12",
+      "descriptor_13",
+      "descriptor_14",
+      "descriptor_15",
+      "descriptor_16",
+      "descriptor_17",
+      "descriptor_18",
+      "descriptor_19",
+      "descriptor_20",
+      "descriptor_21",
+      "descriptor_22",
+      "descriptor_23",
+      "descriptor_24",
+      "descriptor_25",
+      "descriptor_26",
+      "descriptor_27",
+      "descriptor_28",
+      "descriptor_29",
+      "descriptor_30",
+      "descriptor_31",
+      "descriptor_32",
+      "descriptor_33",
+      "descriptor_34",
+      "descriptor_35",
+      "descriptor_36",
+      "descriptor_37",
+      "descriptor_38",
+      "descriptor_39",
+      "descriptor_40",
+      "descriptor_41"
+    ],
+    "target_column": "target",
+    "target_mapping": {
+      "NRB": 0,
+      "RB": 1
+    },
+    "random_state": 2026,
+    "test_size": 0.2,
+    "sample_count": 1055,
+    "feature_count": 41
+  }
+}
