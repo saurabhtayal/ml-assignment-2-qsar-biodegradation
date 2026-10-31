@@ -34,6 +34,8 @@ of each descriptor.
 
 **Repository:** https://github.com/saurabhtayal/ml-assignment-2-qsar-biodegradation
 
+**Live Streamlit application:** https://ml-assignment-2-qsar-biodegradation-onsuyyappeeggmgshgvpift.streamlit.app/
+
 ## Models used and evaluation
 
 All models were trained on the same training partition and evaluated on the
