@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Learning Assignment 2 - QSAR Biodegradation</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm;
+    }
+
+    body {
+      color: #202124;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11pt;
+      line-height: 1.45;
+      margin: 0 auto;
+      max-width: 900px;
+    }
+
+    h1 {
+      border-bottom: 2px solid #1f4e79;
+      color: #1f4e79;
+      font-size: 24pt;
+      padding-bottom: 8px;
+    }
+
+    h2 {
+      border-bottom: 1px solid #b7c9d6;
+      color: #1f4e79;
+      font-size: 16pt;
+      margin-top: 28px;
+      padding-bottom: 4px;
+    }
+
+    h3 {
+      color: #1f4e79;
+      font-size: 13pt;
+      margin-top: 20px;
+    }
+
+    a {
+      color: #0563c1;
+      overflow-wrap: anywhere;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    table {
+      border-collapse: collapse;
+      font-size: 9.5pt;
+      margin: 12px 0 20px;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border: 1px solid #9eacb5;
+      padding: 6px 7px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #dce6f1;
+    }
+
+    .title-block {
+      margin-bottom: 28px;
+      text-align: center;
+    }
+
+    .title-block p {
+      margin: 5px 0;
+    }
+
+    .link-card {
+      background: #f3f7fa;
+      border-left: 4px solid #1f4e79;
+      margin: 12px 0;
+      padding: 10px 14px;
+    }
+
+    .screenshot-placeholder {
+      align-items: center;
+      border: 2px dashed #7f8c8d;
+      color: #5f6368;
+      display: flex;
+      height: 260px;
+      justify-content: center;
+      margin: 12px 0;
+      text-align: center;
+    }
+
+    .page-break {
+      break-before: page;
+    }
+
+    .no-break {
+      break-inside: avoid;
+    }
+  </style>
+</head>
+<body>
+  <header class="title-block">
+    <h1>Machine Learning Assignment 2</h1>
+    <p><strong>QSAR Biodegradation Classifier</strong></p>
+    <p>BITS WILP M.Tech AIML</p>
+  </header>
+
+  <section>
+    <h2>1. Problem statement</h2>
+    <p>
+      Given molecular descriptors for an organic compound, predict whether it
+      is <strong>readily biodegradable (RB)</strong> or
+      <strong>not readily biodegradable (NRB)</strong>. The application
+      accepts a labelled CSV test set, loads one of the pre-trained models,
+      and reports its performance without retraining on uploaded data.
+    </p>
+  </section>
+
+  <section>
+    <h2>2. Dataset description</h2>
+    <p>
+      This project uses the
+      <strong>QSAR biodegradation</strong> dataset from the
+      <a href="https://archive.ics.uci.edu/dataset/254/qsar+biodegradation">
+        UCI Machine Learning Repository
+      </a>.
+    </p>
+    <ul>
+      <li>1,055 compounds and 41 numerical molecular-descriptor features.</li>
+      <li>Binary target: RB (readily biodegradable) and NRB (not readily biodegradable).</li>
+      <li>The supplied data is stored as <code>data/qsar_biodegradation.csv</code>.</li>
+      <li>
+        An 80/20 stratified holdout split uses <code>random_state=2026</code>.
+        The labelled holdout used for the results is
+        <code>data/test_data.csv</code>.
+      </li>
+    </ul>
+    <p>
+      The descriptor names are neutral
+      (<code>descriptor_01</code> through <code>descriptor_41</code>) because
+      the original UCI file provides descriptor values without a header row.
+      The original source remains the authoritative definition of each
+      descriptor.
+    </p>
+  </section>
+
+  <section>
+    <h2>3. GitHub repository link</h2>
+    <div class="link-card">
+      <strong>Repository:</strong>
+      <a href="https://github.com/saurabhtayal/ml-assignment-2-qsar-biodegradation">
+        https://github.com/saurabhtayal/ml-assignment-2-qsar-biodegradation
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>4. Live Streamlit app link</h2>
+    <div class="link-card">
+      <strong>Live application:</strong>
+      <a href="https://ml-assignment-2-qsar-biodegradation-onsuyyappeeggmgshgvpift.streamlit.app/">
+        https://ml-assignment-2-qsar-biodegradation-onsuyyappeeggmgshgvpift.streamlit.app/
+      </a>
+    </div>
+  </section>
+
+  <section class="page-break">
+    <h2>5. BITS Virtual Lab execution screenshot</h2>
+    <p>
+      The screenshot below shows the assignment execution on BITS Virtual Lab.
+    </p>
+    <img
+      alt="BITS Virtual Lab execution screenshot"
+      src="bits-virtual-lab-execution-screenshot.png"
+      style="display: block; margin: 12px auto; max-width: 100%;"
+    >
+  </section>
+
+  <section class="page-break">
+    <h2>6. Models used and evaluation</h2>
+    <p>
+      All models were trained on the same training partition and evaluated on
+      the same untouched 211-row test partition. Standard scaling is included
+      in the Logistic Regression, KNN, and SVM pipelines. The Decision Tree
+      and Gaussian Naive Bayes models use the original numerical values.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ML Model Name</th>
+          <th>Accuracy</th>
+          <th>AUC</th>
+          <th>Precision</th>
+          <th>Recall</th>
+          <th>F1</th>
+          <th>MCC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Logistic Regression</td><td>0.8673</td><td>0.8925</td><td>0.8308</td><td>0.7606</td><td>0.7941</td><td>0.6980</td></tr>
+        <tr><td>Decision Tree</td><td>0.7820</td><td>0.7501</td><td>0.6923</td><td>0.6338</td><td>0.6618</td><td>0.5025</td></tr>
+        <tr><td>KNN</td><td>0.8152</td><td>0.8570</td><td>0.7162</td><td>0.7465</td><td>0.7310</td><td>0.5906</td></tr>
+        <tr><td>Naive Bayes</td><td>0.6919</td><td>0.8335</td><td>0.5242</td><td>0.9155</td><td>0.6667</td><td>0.4742</td></tr>
+        <tr><td>Support Vector Machine</td><td>0.8578</td><td>0.8913</td><td>0.8361</td><td>0.7183</td><td>0.7727</td><td>0.6742</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Observations</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ML Model Name</th>
+          <th>Observation about model performance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Logistic Regression</td>
+          <td>
+            Best overall accuracy, AUC, F1, and MCC. Scaling helps it combine
+            the many correlated descriptors into a stable linear boundary.
+          </td>
+        </tr>
+        <tr>
+          <td>Decision Tree</td>
+          <td>
+            Lowest AUC among the tree-based and distance-based alternatives;
+            its single, bounded-depth tree cannot represent all descriptor
+            interactions as effectively.
+          </td>
+        </tr>
+        <tr>
+          <td>KNN</td>
+          <td>
+            Balanced performance, but weaker than the linear and kernel
+            models. Distance-based decisions are sensitive to the
+            high-dimensional descriptor space even after scaling.
+          </td>
+        </tr>
+        <tr>
+          <td>Naive Bayes</td>
+          <td>
+            Highest recall, so it identifies most RB compounds, but its low
+            precision and accuracy indicate many false positives. The
+            conditional-independence assumption is restrictive for molecular
+            descriptors.
+          </td>
+        </tr>
+        <tr>
+          <td>Support Vector Machine</td>
+          <td>
+            Very strong AUC and precision, close to Logistic Regression. Its
+            slightly lower recall leads to a marginally lower F1 and accuracy
+            on this split.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Overall winner</strong></td>
+          <td>
+            <strong>
+              Logistic Regression, because it leads on the principal aggregate
+              measures while remaining interpretable and efficient. SVM is a
+              close second.
+            </strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>7. Streamlit application features</h2>
+    <ol>
+      <li>A CSV uploader for labelled test data.</li>
+      <li>A classifier dropdown for all five saved models.</li>
+      <li>A Run evaluation button that evaluates the uploaded file only after explicit submission.</li>
+      <li>Accuracy, AUC, precision, recall, F1, and MCC metric cards.</li>
+      <li>A confusion matrix and prediction-summary chart.</li>
+      <li>Validation for missing columns and unsupported target labels.</li>
+    </ol>
+    <p>
+      Uploaded data must contain all 41
+      <code>descriptor_01</code> ... <code>descriptor_41</code> columns and a
+      <code>target</code> column containing <code>NRB</code> or <code>RB</code>.
+      The application loads the saved model and evaluates the uploaded rows
+      without retraining.
+    </p>
+  </section>
+</body>
+</html>
