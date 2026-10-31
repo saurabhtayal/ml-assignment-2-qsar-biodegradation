@@ -14,7 +14,6 @@ from sklearn.metrics import (ConfusionMatrixDisplay, accuracy_score,
 
 ROOT = Path(__file__).resolve().parent
 MODEL_DIR = ROOT / "model"
-DEFAULT_TEST_FILE = ROOT / "data" / "test_data.csv"
 METRICS_FILE = MODEL_DIR / "metrics.json"
 
 st.set_page_config(page_title="QSAR Biodegradation Lab", page_icon="🧪", layout="wide")
@@ -65,29 +64,43 @@ st.markdown(
 )
 metadata = load_metadata()
 models = load_models()
-uploaded = st.file_uploader(
-    "Upload labelled test data as CSV", type="csv",
-    help="Include all 41 descriptor columns and a target column containing NRB or RB."
-)
-frame = pd.read_csv(uploaded) if uploaded else pd.read_csv(DEFAULT_TEST_FILE)
-st.caption(f"Evaluating {len(frame):,} labelled compounds; models are loaded, not retrained.")
-selected = st.selectbox("Choose a classifier", list(models))
-try:
-    metrics, matrix = evaluate(models[selected], frame, metadata)
-except (KeyError, ValueError) as error:
-    st.error(str(error))
+with st.form("evaluation_form"):
+    uploaded = st.file_uploader(
+        "Upload labelled test data as CSV", type="csv",
+        help="Include all 41 descriptor columns and a target column containing NRB or RB."
+    )
+    selected = st.selectbox("Choose a classifier", list(models))
+    submitted = st.form_submit_button("Run evaluation", type="primary")
+
+if not submitted:
+    st.info("Upload a labelled CSV file and click **Run evaluation** to see the results.")
+elif uploaded is None:
+    st.warning("Please upload a labelled CSV file before running the evaluation.")
 else:
-    columns = st.columns(6)
-    for column, (name, value) in zip(columns, metrics.items()):
-        column.metric(name, f"{value:.3f}")
-    left, right = st.columns((1, 1))
-    with left:
-        st.subheader("Confusion matrix")
-        chart = ConfusionMatrixDisplay(matrix, display_labels=["NRB", "RB"])
-        st.pyplot(chart.plot(cmap="Blues", values_format="d").figure_, clear_figure=True)
-    with right:
-        st.subheader("Prediction summary")
-        predictions = models[selected].predict(frame[metadata["feature_names"]])
-        summary = pd.Series(predictions).map({0: "NRB", 1: "RB"}).value_counts()
-        st.bar_chart(summary)
-        st.dataframe(frame.head(10), use_container_width=True)
+    try:
+        frame = pd.read_csv(uploaded)
+    except (pd.errors.EmptyDataError, pd.errors.ParserError, UnicodeDecodeError) as error:
+        st.error(f"Could not read the uploaded CSV file: {error}")
+    else:
+        st.caption(
+            f"Evaluating {len(frame):,} labelled compounds; models are loaded, not retrained."
+        )
+        try:
+            metrics, matrix = evaluate(models[selected], frame, metadata)
+        except (KeyError, ValueError) as error:
+            st.error(str(error))
+        else:
+            columns = st.columns(6)
+            for column, (name, value) in zip(columns, metrics.items()):
+                column.metric(name, f"{value:.3f}")
+            left, right = st.columns((1, 1))
+            with left:
+                st.subheader("Confusion matrix")
+                chart = ConfusionMatrixDisplay(matrix, display_labels=["NRB", "RB"])
+                st.pyplot(chart.plot(cmap="Blues", values_format="d").figure_, clear_figure=True)
+            with right:
+                st.subheader("Prediction summary")
+                predictions = models[selected].predict(frame[metadata["feature_names"]])
+                summary = pd.Series(predictions).map({0: "NRB", 1: "RB"}).value_counts()
+                st.bar_chart(summary)
+                st.dataframe(frame.head(10), use_container_width=True)
