@@ -21,7 +21,7 @@ from the UCI Machine Learning Repository:
 - Binary target: `RB` (readily biodegradable) or `NRB` (not readily
   biodegradable)
 - The supplied data is stored as `data/qsar_biodegradation.csv` with
-  descriptive feature headers. The downloadable UCI archive is not committed.
+  descriptive feature headers.
 - An 80/20 stratified holdout split uses `random_state=2026`. The exact
   labelled holdout used for the results is `data/test_data.csv`.
 
@@ -34,27 +34,7 @@ of each descriptor.
 
 **Repository:** https://github.com/saurabhtayal/ml-assignment-2-qsar-biodegradation
 
-Expected repository contents:
-
-```text
-app.py
-train_models.py
-evaluate_models.py
-requirements.txt
-README.md
-data/
-  qsar_biodegradation.csv
-  test_data.csv
-model/
-  logistic_regression.joblib
-  decision_tree.joblib
-  knearest_neighbors.joblib
-  naive_bayes.joblib
-  support_vector_machine.joblib
-  metrics.json
-```
-
-## Models and evaluation
+## Models used and evaluation
 
 All models were trained on the same training partition and evaluated on the
 same untouched 211-row test partition. Standard scaling is included in the
@@ -86,37 +66,13 @@ The app includes:
 
 1. A CSV uploader for labelled test data.
 2. A classifier dropdown for all five saved models.
-3. Accuracy, AUC, precision, recall, F1, and MCC metric cards.
-4. A confusion matrix and prediction-summary chart.
-5. Validation for missing columns and unsupported target labels.
+3. A **Run evaluation** button that evaluates the uploaded file only after
+   explicit submission.
+4. Accuracy, AUC, precision, recall, F1, and MCC metric cards.
+5. A confusion matrix and prediction-summary chart.
+6. Validation for missing columns and unsupported target labels.
 
 Uploaded data must contain all 41 `descriptor_01` ... `descriptor_41` columns
 and a `target` column containing `NRB` or `RB`. The application never calls
 `.fit()`; it only loads the committed `.joblib` artifacts and evaluates the
 uploaded rows.
-
-### Run locally
-
-```bash
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-python train_models.py
-python evaluate_models.py
-streamlit run app.py
-```
-
-### Deploy on Streamlit Community Cloud
-
-1. Push this repository to GitHub.
-2. Open https://share.streamlit.io/ and sign in with GitHub.
-3. Choose **New app**, this repository, the `main` branch, and `app.py`.
-4. Deploy and copy the resulting public URL into the assignment PDF.
-
-## Reproducibility and academic integrity
-
-The training script records the split seed and dataset dimensions in
-`model/metrics.json`. The repository contains original naming, UI wording,
-documentation, and a less popular dataset choice rather than copying a
-template or another student's outputs. The required BITS Virtual Lab
-screenshot and the final PDF submission must be prepared by the student.
