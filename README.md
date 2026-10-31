@@ -13,7 +13,7 @@ models, and reports its performance without retraining on uploaded data.
 
 ## Dataset description
 
-This project uses the less commonly selected **QSAR biodegradation** dataset
+This project uses the **QSAR biodegradation** dataset
 from the UCI Machine Learning Repository:
 
 - Source: https://archive.ics.uci.edu/dataset/254/qsar+biodegradation
