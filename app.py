@@ -64,6 +64,12 @@ st.markdown(
 )
 metadata = load_metadata()
 models = load_models()
+st.markdown(
+    "Sample test data is available in the GitHub repository at "
+    "`data/test_data.csv`: "
+    "[download sample test data](https://github.com/saurabhtayal/"
+    "ml-assignment-2-qsar-biodegradation/blob/main/data/test_data.csv)."
+)
 with st.form("evaluation_form"):
     uploaded = st.file_uploader(
         "Upload labelled test data as CSV", type="csv",
